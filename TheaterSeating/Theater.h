@@ -16,6 +16,7 @@ private:
 	int _seats_per_row;
 	int _rows;
 	int _seats;
+	char _starting_row = 'a';
 
 	// Private methods
 	void _empty_seats();

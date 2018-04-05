@@ -53,10 +53,17 @@ void Theater::_empty_seats()
 void Theater::display_seating()
 {
 	std::cout << "Row       Seats" << std::endl;
-	std::cout << "    1 2 3 4 5 6 7 8 9" << std::endl;
+
+	std::cout << "    ";
+	for (int seat = 0; seat < _seats_per_row; seat++)
+	{
+		std::cout << seat + 1 << " ";
+	}
+	std::cout << std::endl;
+	
 	for (int row = 0; row < _rows; row++)
 	{
-		std::cout << row << "  ";
+		printf("%-3c", _starting_row + row);
 		for (int seat = 0; seat < _seats_per_row; seat++)
 		{
 			std::cout << '|';
