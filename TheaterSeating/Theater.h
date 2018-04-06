@@ -6,8 +6,11 @@ public:
 	
 	// Public Methods
 	Theater(int seats, int rows);
+	Theater(const Theater &theater);
+	Theater &operator=(const Theater &theater);
 	~Theater();
 	void display_seating();
+	void sell_seat(int row, int seat);
 
 
 private:
@@ -21,4 +24,3 @@ private:
 	// Private methods
 	void _empty_seats();
 };
-
