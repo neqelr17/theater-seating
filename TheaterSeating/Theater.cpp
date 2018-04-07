@@ -6,29 +6,29 @@
 
 //
 // Constructor with seats and rows passed in.
-Theater::Theater(int seats_per_row, int rows) : _seats_per_row(seats_per_row), _rows(rows), _seats(seats_per_row * rows), _seating_chart(new bool*[rows])
+Theater::Theater(int seats_per_row, int rows) : seats_per_row_(seats_per_row), rows_(rows), seats_(seats_per_row * rows), seating_chart_(new bool*[rows])
 {
 	// Allocate seating chart based off of seats and rows.
-	for (int row = 0; row < _rows; row++)
+	for (int row = 0; row < rows_; row++)
 	{
-		_seating_chart[row] = new bool[_seats_per_row];
+		seating_chart_[row] = new bool[seats_per_row_];
 	}
-	_empty_seats();
+	EmptySeats();
 }
 
 
 //
 // Copy Constructor
-Theater::Theater(const Theater &theater) : _seats_per_row(theater._seats_per_row), _rows(theater._rows),
-	_seats(theater._seats), _starting_row(theater._starting_row), _seating_chart(new bool*[theater._rows])
+Theater::Theater(const Theater &theater) : seats_per_row_(theater.seats_per_row_), rows_(theater.rows_),
+	seats_(theater.seats_), starting_row_(theater.starting_row_), seating_chart_(new bool*[theater.rows_])
 {
-	// Copy values of _seating_chart into new Theater _seating_chart
-	for (int row = 0; row < _rows; row++)
+	// Copy values of seating_chart_ into new Theater seating_chart_
+	for (int row = 0; row < rows_; row++)
 	{
-		_seating_chart[row] = new bool[_seats_per_row];
-		for (int seat = 0; seat < _seats_per_row; seat++)
+		seating_chart_[row] = new bool[seats_per_row_];
+		for (int seat = 0; seat < seats_per_row_; seat++)
 		{
-			_seating_chart[row][seat] = theater._seating_chart[row][seat];
+			seating_chart_[row][seat] = theater.seating_chart_[row][seat];
 		}
 	}
 }
@@ -38,26 +38,26 @@ Theater::Theater(const Theater &theater) : _seats_per_row(theater._seats_per_row
 // Overload = operator
 Theater &Theater::operator=(const Theater &theater)
 {
-	// Clean up memory of old _seating_chart to prevent memory leaks
-	for (int row = 0; row < _rows; row++)
+	// Clean up memory of old seating_chart_ to prevent memory leaks
+	for (int row = 0; row < rows_; row++)
 	{
-		delete[] _seating_chart[row];
+		delete[] seating_chart_[row];
 	}
-	delete[] _seating_chart;
+	delete[] seating_chart_;
 
 	// set attributes
-	_seats_per_row = theater._seats_per_row;
-	_rows = theater._rows;
-	_seats = theater._seats;
+	seats_per_row_ = theater.seats_per_row_;
+	rows_ = theater.rows_;
+	seats_ = theater.seats_;
 	
-	// Copy values of theater._seating_chart into new _seating_chart
-	_seating_chart = new bool*[theater._rows];
-	for (int row = 0; row < _rows; row++)
+	// Copy values of theater.seating_chart_ into new seating_chart_
+	seating_chart_ = new bool*[theater.rows_];
+	for (int row = 0; row < rows_; row++)
 	{
-		_seating_chart[row] = new bool[_seats_per_row];
-		for (int seat = 0; seat < _seats_per_row; seat++)
+		seating_chart_[row] = new bool[seats_per_row_];
+		for (int seat = 0; seat < seats_per_row_; seat++)
 		{
-			_seating_chart[row][seat] = theater._seating_chart[row][seat];
+			seating_chart_[row][seat] = theater.seating_chart_[row][seat];
 		}
 	}
 	return *this;
@@ -68,24 +68,24 @@ Theater &Theater::operator=(const Theater &theater)
 // Destructor
 Theater::~Theater()
 {
-	// Delete _seating_chart
-	for (int row = 0; row < _rows; row++)
+	// Delete seating_chart_
+	for (int row = 0; row < rows_; row++)
 	{
-		delete[] _seating_chart[row];
+		delete[] seating_chart_[row];
 	}
-	delete[] _seating_chart;
+	delete[] seating_chart_;
 }
 
 
 //
 // Empty all seats
-void Theater::_empty_seats()
+void Theater::EmptySeats()
 {
-	for (int row = 0; row < _rows; row++)
+	for (int row = 0; row < rows_; row++)
 	{
-		for (int seat = 0; seat < _seats_per_row; seat++)
+		for (int seat = 0; seat < seats_per_row_; seat++)
 		{
-			_seating_chart[row][seat] = false;
+			seating_chart_[row][seat] = false;
 		}
 	}
 }
@@ -93,24 +93,24 @@ void Theater::_empty_seats()
 
 //
 // Display seating chart
-void Theater::display_seating()
+void Theater::DisplaySeating()
 {
 	std::cout << "Row       Seats" << std::endl;
 
 	std::cout << "    ";
-	for (int seat = 0; seat < _seats_per_row; seat++)
+	for (int seat = 0; seat < seats_per_row_; seat++)
 	{
 		std::cout << seat + 1 << " ";
 	}
 	std::cout << std::endl;
 	
-	for (int row = 0; row < _rows; row++)
+	for (int row = 0; row < rows_; row++)
 	{
-		printf("%-3c", _starting_row + row);
-		for (int seat = 0; seat < _seats_per_row; seat++)
+		printf("%-3c", starting_row_ + row);
+		for (int seat = 0; seat < seats_per_row_; seat++)
 		{
 			std::cout << '|';
-			if (_seating_chart[row][seat])
+			if (seating_chart_[row][seat])
 			{
 				std::cout << '*';
 			}
@@ -126,10 +126,10 @@ void Theater::display_seating()
 
 //
 // Mark seat as sold.
-void Theater::sell_seat(int row, int seat)
+void Theater::SellSeat(int row, int seat)
 {
-	if (row > 0 && row < _rows + 1 && seat > 0 && seat < _seats_per_row + 1)
+	if (row > 0 && row < rows_ + 1 && seat > 0 && seat < seats_per_row_ + 1)
 	{
-		_seating_chart[row - 1][seat - 1] = true;
+		seating_chart_[row - 1][seat - 1] = true;
 	}
 }
