@@ -95,15 +95,15 @@ void Theater::EmptySeats()
 // Display seating chart
 void Theater::DisplaySeating()
 {
-	std::cout << "    _____Screen______" << std::endl;
-	std::cout << "Row       Seats        #: Availible" << std::endl;
+	std::cout << "    _____Screen______  ----------------" << std::endl;
+	std::cout << "Row       Seats        | #: Availible |" << std::endl;
 
 	std::cout << "    ";
 	for (int seat = 0; seat < seats_per_row_; seat++)
 	{
 		std::cout << seat + 1 << " ";
 	}
-	std::cout << " *: Taken" << std::endl;
+	std::cout << " | *: Taken     |" << std::endl;
 	
 	for (int row = 0; row < rows_; row++)
 	{
@@ -120,7 +120,12 @@ void Theater::DisplaySeating()
 				std::cout << '#';
 			}
 		}
-		std::cout << '|' << std::endl;
+		std::cout << '|';
+		if (row == 0)
+		{
+			std::cout << " ----------------";
+		}
+		std::cout << std::endl;
 	}
 }
 
