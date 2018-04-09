@@ -95,7 +95,7 @@ void Theater::EmptySeats()
 // Display seating chart
 void Theater::DisplaySeating()
 {
-	std::cout << "    _____Screen______  ----------------" << std::endl;
+	std::cout << "    ______Stage______  ----------------" << std::endl;
 	std::cout << "Row       Seats        | #: Availible |" << std::endl;
 
 	std::cout << "    ";
