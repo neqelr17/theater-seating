@@ -12,7 +12,11 @@ public:
 
 	// Public Methods
 	void DisplaySeating();
-	void SellSeat(int row, int seat);
+	void DisplaySeating(const int &row, const int &seat_start, const int &seat_end);
+	void SellSeat(const int &row, const int &seat);
+	bool SeatAvailible(const int &row, const int &seat);
+	bool ValidateSeat(const int &row, const int &seat);
+	int ConvertRowToInt(const char &row);
 
 
 private:

@@ -131,11 +131,88 @@ void Theater::DisplaySeating()
 
 
 //
+// Display seating chart with selected seats
+void Theater::DisplaySeating(const int &selected_row, const int &seat_start, const int &seat_end)
+{
+	std::cout << "    ______Stage______  ----------------" << std::endl;
+	std::cout << "Row       Seats        | #: Availible |" << std::endl;
+
+	std::cout << "    ";
+	for (int seat = 0; seat < seats_per_row_; seat++)
+	{
+		std::cout << seat + 1 << " ";
+	}
+	std::cout << " | *: Taken     |" << std::endl;
+
+	for (int row = 0; row < rows_; row++)
+	{
+		printf("%-3c", starting_row_ + row);
+		for (int seat = 0; seat < seats_per_row_; seat++)
+		{
+			std::cout << '|';
+			if (selected_row == row && seat >= seat_start && seat <= seat_end)
+			{
+				std::cout << 's';
+			}
+			else
+			{
+				if (seating_chart_[row][seat])
+				{
+					std::cout << '*';
+				}
+				else
+				{
+					std::cout << '#';
+				}
+			}
+		}
+		std::cout << '|';
+		if (row == 0)
+		{
+			std::cout << " ----------------";
+		}
+		std::cout << std::endl;
+	}
+}
+
+
+//
 // Mark seat as sold.
-void Theater::SellSeat(int row, int seat)
+void Theater::SellSeat(const int &row, const int &seat)
 {
 	if (row > 0 && row < rows_ + 1 && seat > 0 && seat < seats_per_row_ + 1)
 	{
 		seating_chart_[row - 1][seat - 1] = true;
 	}
+}
+
+
+//
+// Check to see if seat is availble
+bool Theater::SeatAvailible(const int &row, const int &seat)
+{
+	return seating_chart_[row][seat];
+}
+
+
+//
+// Validate if seat is a valid seat in the theater
+bool Theater::ValidateSeat(const int &row, const int &seat)
+{
+	if (row > 0 && row < rows_)
+	{
+		if (seat > 0 && seat < seats_per_row_)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+
+//
+// Return int of a given row
+int Theater::ConvertRowToInt(const char &row)
+{
+	return starting_row_ - row;
 }
