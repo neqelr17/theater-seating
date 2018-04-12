@@ -17,6 +17,7 @@ public:
 	MenuOptions GetMenuChoice();
 	bool SetMenuChoice(int option);
 	void GetUserChoice();
+	void ShowMenu();
 
 private:
 	MenuOptions menu_choice_ = MenuOptions::kShowSeating;

@@ -31,6 +31,23 @@ bool Menu::SetMenuChoice(int option)
 }
 
 
+//
+// Prints menu to console.
+void Menu::ShowMenu()
+{
+	std::cout << "\nMenu:\n";
+	std::cout << "------------------------------\n";
+	std::cout << " 1) Show Available Seating\n";
+	std::cout << " 2) Sell Tickets\n";
+	std::cout << " 3) Show Theater Statistics\n";
+	std::cout << " 9) Exit\n";
+	std::cout << "------------------------------\n";
+	std::cout << "Enter menu option: ";
+}
+
+
+//
+// Display menu to console and request input from user and validate input.
 void Menu::GetUserChoice()
 {
 	int choice = 0;
@@ -38,14 +55,7 @@ void Menu::GetUserChoice()
 	
 	while (!is_valid)
 	{
-		std::cout << "\nMenu:\n";
-		std::cout << "------------------------------\n";
-		std::cout << " 1) Show Available Seating\n";
-		std::cout << " 2) Sell Tickets\n";
-		std::cout << " 3) Show Theater Statistics\n";
-		std::cout << " 9) Exit\n";
-		std::cout << "------------------------------\n";
-		std::cout << "Enter menu option: ";
+		ShowMenu();
 
 		// Get and validate input from user
 		std::cin >> choice;
