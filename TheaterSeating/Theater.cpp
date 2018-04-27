@@ -96,9 +96,9 @@ void Theater::EmptySeats()
 void Theater::DisplaySeating()
 {
 	std::cout << "    ______Stage______  ----------------" << std::endl;
-	std::cout << "Row       Seats        | #: Availible |" << std::endl;
+	std::cout << "          Seats        | #: Availible |" << std::endl;
 
-	std::cout << "    ";
+	std::cout << "Row ";
 	for (int seat = 0; seat < seats_per_row_; seat++)
 	{
 		std::cout << seat + 1 << " ";
@@ -135,9 +135,9 @@ void Theater::DisplaySeating()
 void Theater::DisplaySeating(const int &selected_row, const int &seat_start, const int &seat_end)
 {
 	std::cout << "    ______Stage______  ----------------" << std::endl;
-	std::cout << "Row       Seats        | #: Availible |" << std::endl;
+	std::cout << "          Seats        | #: Availible |" << std::endl;
 
-	std::cout << "    ";
+	std::cout << "Row ";
 	for (int seat = 0; seat < seats_per_row_; seat++)
 	{
 		std::cout << seat + 1 << " ";
@@ -150,7 +150,7 @@ void Theater::DisplaySeating(const int &selected_row, const int &seat_start, con
 		for (int seat = 0; seat < seats_per_row_; seat++)
 		{
 			std::cout << '|';
-			if (selected_row == row && seat >= seat_start && seat <= seat_end)
+			if (selected_row == row && seat >= seat_start && seat < seat_end)
 			{
 				std::cout << 's';
 			}
@@ -180,9 +180,22 @@ void Theater::DisplaySeating(const int &selected_row, const int &seat_start, con
 // Mark seat as sold.
 void Theater::SellSeat(const int &row, const int &seat)
 {
-	if (row > 0 && row < rows_ + 1 && seat > 0 && seat < seats_per_row_ + 1)
+	if (row >= 0 && row < rows_ && seat >= 0 && seat < seats_per_row_)
 	{
-		seating_chart_[row - 1][seat - 1] = true;
+		seating_chart_[row][seat] = true;
+	}
+}
+
+//
+// Mark a group of tickets sold.
+void Theater::SellGroup(const int & row, const int & seat_start, const int & ticket_count)
+{
+	if (row >= 0 && row < rows_ && seat_start >= 0 && seat_start + ticket_count <= seats_per_row_)
+	{
+		for (int seat = seat_start; seat < seat_start + ticket_count; seat++)
+		{
+			seating_chart_[row][seat] = true;
+		}
 	}
 }
 
@@ -191,7 +204,22 @@ void Theater::SellSeat(const int &row, const int &seat)
 // Check to see if seat is availble
 bool Theater::SeatAvailible(const int &row, const int &seat)
 {
-	return seating_chart_[row][seat];
+	return !seating_chart_[row][seat];
+}
+
+bool Theater::GroupAvailible(const int & row, const int & seat_start, const int & ticket_count)
+{
+	bool is_availble = true;
+
+	for (int seat = seat_start; seat < seat_start + ticket_count; seat++)
+	{
+		if (seating_chart_[row][seat])
+		{
+			is_availble = false;
+		}
+	}
+
+	return is_availble;
 }
 
 
@@ -199,11 +227,27 @@ bool Theater::SeatAvailible(const int &row, const int &seat)
 // Validate if seat is a valid seat in the theater
 bool Theater::ValidateSeat(const int &row, const int &seat)
 {
-	if (row > 0 && row < rows_)
+	if (row >= 0 && row < rows_)
 	{
-		if (seat > 0 && seat < seats_per_row_)
+		if (seat >= 0 && seat < seats_per_row_)
 		{
 			return true;
+		}
+	}
+	return false;
+}
+
+bool Theater::ValidateGroup(const int & row, const int & seat_start, const int & ticket_count)
+{
+	bool is_valid = false;
+	if (row >= 0 && row < rows_)
+	{
+		if (seat_start >= 0 && seat_start < seats_per_row_)
+		{
+			if (seat_start + ticket_count < seats_per_row_)
+			{
+				return true;
+			}
 		}
 	}
 	return false;
@@ -214,5 +258,5 @@ bool Theater::ValidateSeat(const int &row, const int &seat)
 // Return int of a given row
 int Theater::ConvertRowToInt(const char &row)
 {
-	return starting_row_ - row;
+	return row - starting_row_;
 }

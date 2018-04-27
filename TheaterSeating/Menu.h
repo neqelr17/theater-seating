@@ -9,8 +9,9 @@ public:
 	enum class MenuOptions
 	{
 		kShowSeating = 1,
-		kSellSeats = 2,
-		kStats = 3,
+		kSellSeat = 2,
+		kSellGroup =3,
+		kStats = 8,
 		kExit = 9
 	};
 
