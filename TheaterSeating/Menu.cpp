@@ -22,7 +22,7 @@ Menu::MenuOptions Menu::GetMenuChoice()
 
 bool Menu::SetMenuChoice(int option)
 {
-	if (option > 0 && option < 4 || option == 9)
+	if (option > 0 && option < 4 || option == (int)Menu::MenuOptions::kStats || option == (int)Menu::MenuOptions::kExit)
 	{
 		menu_choice_ = static_cast<Menu::MenuOptions>(option);
 		return true;
@@ -37,10 +37,11 @@ void Menu::ShowMenu()
 {
 	std::cout << "\nMenu:\n";
 	std::cout << "------------------------------\n";
-	std::cout << " 1) Show Available Seating\n";
-	std::cout << " 2) Sell Tickets\n";
-	std::cout << " 3) Show Theater Statistics\n";
-	std::cout << " 9) Exit\n";
+	std::cout << " " << (int)Menu::MenuOptions::kShowSeating << ") Show Available Seating\n";
+	std::cout << " " << (int)Menu::MenuOptions::kSellSeat <<") Sell Tickets\n";
+	std::cout << " " << (int)Menu::MenuOptions::kSellGroup << ") Sell Group\n";
+	std::cout << "\n " << (int)Menu::MenuOptions::kStats <<") Show Theater Statistics\n";
+	std::cout << " " << (int)Menu::MenuOptions::kExit <<") Exit\n";
 	std::cout << "------------------------------\n";
 	std::cout << "Enter menu option: ";
 }
