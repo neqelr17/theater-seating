@@ -21,6 +21,7 @@ public:
 	bool ValidateGroup(const int &row, const int &seat_start, const int &ticket_count);
 	
 	int ConvertRowToInt(const char &row);
+	int GetSeatsPerRow();
 
 
 private:

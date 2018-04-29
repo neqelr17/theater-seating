@@ -260,3 +260,8 @@ int Theater::ConvertRowToInt(const char &row)
 {
 	return row - starting_row_;
 }
+
+int Theater::GetSeatsPerRow()
+{
+	return seats_per_row_;
+}
