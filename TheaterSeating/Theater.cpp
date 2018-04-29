@@ -6,7 +6,7 @@
 
 //
 // Constructor with seats and rows passed in.
-Theater::Theater(int seats_per_row, int rows) : seats_per_row_(seats_per_row), rows_(rows), seats_(seats_per_row * rows), seating_chart_(new bool*[rows])
+Theater::Theater(int seats_per_row, int rows, float seat_price) : seats_per_row_(seats_per_row), rows_(rows), seats_(seats_per_row * rows), seating_chart_(new bool*[rows]), seat_price_(seat_price)
 {
 	// Allocate seating chart based off of seats and rows.
 	for (int row = 0; row < rows_; row++)
@@ -20,7 +20,7 @@ Theater::Theater(int seats_per_row, int rows) : seats_per_row_(seats_per_row), r
 //
 // Copy Constructor
 Theater::Theater(const Theater &theater) : seats_per_row_(theater.seats_per_row_), rows_(theater.rows_),
-	seats_(theater.seats_), starting_row_(theater.starting_row_), seating_chart_(new bool*[theater.rows_])
+	seats_(theater.seats_), starting_row_(theater.starting_row_), seat_price_(theater.seat_price_), seating_chart_(new bool*[theater.rows_])
 {
 	// Copy values of seating_chart_ into new Theater seating_chart_
 	for (int row = 0; row < rows_; row++)
@@ -49,6 +49,7 @@ Theater &Theater::operator=(const Theater &theater)
 	seats_per_row_ = theater.seats_per_row_;
 	rows_ = theater.rows_;
 	seats_ = theater.seats_;
+	seat_price_ = theater.seat_price_;
 	
 	// Copy values of theater.seating_chart_ into new seating_chart_
 	seating_chart_ = new bool*[theater.rows_];
@@ -264,4 +265,9 @@ int Theater::ConvertRowToInt(const char &row)
 int Theater::GetSeatsPerRow()
 {
 	return seats_per_row_;
+}
+
+float Theater::GetSeatPrice()
+{
+	return seat_price_;
 }

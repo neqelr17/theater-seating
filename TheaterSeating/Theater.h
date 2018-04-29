@@ -5,7 +5,7 @@ public:
 	// Public Attributes
 	
 	// Constructor and Operator Methods
-	Theater(int seats, int rows);
+	Theater(int seats, int rows, float seat_price);
 	Theater(const Theater &theater);
 	Theater &operator=(const Theater &theater);
 	~Theater();
@@ -22,6 +22,7 @@ public:
 	
 	int ConvertRowToInt(const char &row);
 	int GetSeatsPerRow();
+	float GetSeatPrice();
 
 
 private:
@@ -31,6 +32,7 @@ private:
 	int rows_;
 	int seats_;
 	char starting_row_ = 'a';
+	float seat_price_;
 
 	// Private methods
 	void EmptySeats();
