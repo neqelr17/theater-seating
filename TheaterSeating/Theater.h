@@ -19,10 +19,15 @@ public:
 	bool GroupAvailible(const int &row, const int &seat_start, const int &ticket_count);
 	bool ValidateSeat(const int &row, const int &seat);
 	bool ValidateGroup(const int &row, const int &seat_start, const int &ticket_count);
+
+	int TotalSeatsAvailble();
+	int TotalSeatsSold();
+	void DisplaySeatsAvailblePerRow();
 	
 	int ConvertRowToInt(const char &row);
 	int GetSeatsPerRow();
 	float GetSeatPrice();
+	
 
 
 private:
