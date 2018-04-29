@@ -254,6 +254,43 @@ bool Theater::ValidateGroup(const int & row, const int & seat_start, const int &
 	return false;
 }
 
+int Theater::TotalSeatsAvailble()
+{
+	int seats_availble = 0;
+	for (int row = 0; row < rows_; row++)
+	{
+		for (int seat = 0; seat < seats_per_row_; seat++)
+		{
+			if (!seating_chart_[row][seat])
+			{
+				seats_availble++;
+			}
+		}
+	}
+	return seats_availble;
+}
+
+int Theater::TotalSeatsSold()
+{
+	return seats_ - TotalSeatsAvailble();
+}
+
+void Theater::DisplaySeatsAvailblePerRow()
+{
+	for (int row = 0; row < rows_; row++)
+	{
+		int seats_availble = 0;
+		for (int seat = 0; seat < seats_per_row_; seat++)
+		{
+			if (!seating_chart_[row][seat])
+			{
+				seats_availble++;
+			}
+		}
+		std::cout << "Row " << (char)(starting_row_ + row) << ": | Seats Availble: " << seats_availble << " |\n";
+	}
+}
+
 
 //
 // Return int of a given row
