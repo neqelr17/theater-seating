@@ -97,7 +97,7 @@ void Theater::EmptySeats()
 void Theater::DisplaySeating()
 {
 	std::cout << "    ______Stage______  ----------------" << std::endl;
-	std::cout << "          Seats        | #: Availible |" << std::endl;
+	std::cout << "          Seats        | #: Available |" << std::endl;
 
 	std::cout << "Row ";
 	for (int seat = 0; seat < seats_per_row_; seat++)
@@ -136,7 +136,7 @@ void Theater::DisplaySeating()
 void Theater::DisplaySeating(const int &selected_row, const int &seat_start, const int &seat_end)
 {
 	std::cout << "    ______Stage______  ----------------" << std::endl;
-	std::cout << "          Seats        | #: Availible |" << std::endl;
+	std::cout << "          Seats        | #: Available |" << std::endl;
 
 	std::cout << "Row ";
 	for (int seat = 0; seat < seats_per_row_; seat++)
@@ -203,12 +203,12 @@ void Theater::SellGroup(const int & row, const int & seat_start, const int & tic
 
 //
 // Check to see if seat is availble
-bool Theater::SeatAvailible(const int &row, const int &seat)
+bool Theater::SeatAvailable(const int &row, const int &seat)
 {
 	return !seating_chart_[row][seat];
 }
 
-bool Theater::GroupAvailible(const int & row, const int & seat_start, const int & ticket_count)
+bool Theater::GroupAvailable(const int & row, const int & seat_start, const int & ticket_count)
 {
 	bool is_availble = true;
 

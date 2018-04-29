@@ -15,8 +15,8 @@ public:
 	void DisplaySeating(const int &row, const int &seat_start, const int &seat_end);
 	void SellSeat(const int &row, const int &seat);
 	void SellGroup(const int &row, const int &seat_start, const int &ticket_count);
-	bool SeatAvailible(const int &row, const int &seat);
-	bool GroupAvailible(const int &row, const int &seat_start, const int &ticket_count);
+	bool SeatAvailable(const int &row, const int &seat);
+	bool GroupAvailable(const int &row, const int &seat_start, const int &ticket_count);
 	bool ValidateSeat(const int &row, const int &seat);
 	bool ValidateGroup(const int &row, const int &seat_start, const int &ticket_count);
 
