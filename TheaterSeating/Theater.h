@@ -26,6 +26,7 @@ public:
 	
 	int ConvertRowToInt(const char &row);
 	int GetSeatsPerRow();
+	int GetAvailableSeatsInRow(int row, int start_seat);
 	float GetSeatPrice();
 	
 
@@ -37,7 +38,7 @@ private:
 	int rows_;
 	int seats_;
 	char starting_row_ = 'a';
-	float seat_price_;
+	double seat_price_;
 
 	// Private methods
 	void EmptySeats();

@@ -304,6 +304,23 @@ int Theater::GetSeatsPerRow()
 	return seats_per_row_;
 }
 
+int Theater::GetAvailableSeatsInRow(int row, int start_seat)
+{
+	int seats_available = 0;
+	for (int seat = start_seat; seat <= seats_per_row_; seat++)
+	{
+		if (!seating_chart_[row][seat])
+		{
+			seats_available++;
+		}
+		else
+		{
+			break;
+		}
+	}
+	return seats_available;
+}
+
 float Theater::GetSeatPrice()
 {
 	return seat_price_;
