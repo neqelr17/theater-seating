@@ -243,9 +243,9 @@ bool Theater::ValidateGroup(const int & row, const int & seat_start, const int &
 	bool is_valid = false;
 	if (row >= 0 && row < rows_)
 	{
-		if (seat_start >= 0 && seat_start < seats_per_row_)
+		if (seat_start >= 0 && seat_start <= seats_per_row_)
 		{
-			if (seat_start + ticket_count < seats_per_row_)
+			if (seat_start + ticket_count <= seats_per_row_)
 			{
 				return true;
 			}
